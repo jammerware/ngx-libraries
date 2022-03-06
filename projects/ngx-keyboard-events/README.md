@@ -1,7 +1,7 @@
 [![npm version](https://badge.fury.io/js/ngx-keyboard-events.svg)](https://badge.fury.io/js/ngx-keyboard-events)
 
 # NgxKeyboardEvents
-This is a simple [Angular](https://angular.io) module to bring an easy way to listen to keyboard events in a modularized way.
+This is a simple [Angular](https://angular.io) module to bring an easy way to listen to keyboard events in a modularized way consistent with Angular's style.
 
 Right now, `ngx-keyboard-events` assumes that you're using Angular in a browser environment. Angular has changed a lot since I started using it, so I'm pretty sure this is a terrible assumption. If you're using it elsewhere and want to offer some recommendations on how to make this library more friendly to other environments, open an issue!
 
