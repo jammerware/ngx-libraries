@@ -1,7 +1,4 @@
 import { NgModule } from '@angular/core';
-import { NgxKeyboardEventsService } from './ngx-keyboard-events.service';
 
-@NgModule({
-  providers: [NgxKeyboardEventsService]
-})
+@NgModule()
 export class NgxKeyboardEventsModule { }

@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-
+import { NgxKeyboardEventsModule } from './ngx-keyboard-events.module';
 
 export enum NgxKeyCode {
   // letters and numbers
@@ -129,7 +129,7 @@ export class NgxKeyboardEvent {
   name: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: NgxKeyboardEventsModule })
 export class NgxKeyboardEventsService {
   public onKeyPressed: EventEmitter<NgxKeyboardEvent> = new EventEmitter<NgxKeyboardEvent>();
 
