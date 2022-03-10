@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { NgxKeyboardEventsModule } from './ngx-keyboard-events.module';
 
-export enum NgxKeyCode {
+export enum NgxKey {
   // letters and numbers
   A = 65,
   B = 66,
@@ -76,6 +76,7 @@ export enum NgxKeyCode {
   F12 = 123,
 
   // random commands
+  Backspace = 8,
   Delete = 46,
   End = 35,
   Escape = 27,
@@ -118,13 +119,13 @@ export enum NgxKeyCode {
 }
 
 export enum NgxKeyModifier {
-  Alt,
+  AltOption,
   CtrlCmd,
   Shift
 }
 
 export class NgxKeyboardEvent {
-  code: NgxKeyCode;
+  code: NgxKey;
   modifiers: NgxKeyModifier[];
   name: string;
 }
@@ -143,12 +144,12 @@ export class NgxKeyboardEventsService {
     resolveKeyboardEvent(keyEvent: KeyboardEvent) {
         const modifiers: NgxKeyModifier[] = [];
 
-        if (keyEvent.altKey) { modifiers.push(NgxKeyModifier.Alt); }
+        if (keyEvent.altKey) { modifiers.push(NgxKeyModifier.AltOption); }
         if (keyEvent.ctrlKey) { modifiers.push(NgxKeyModifier.CtrlCmd); }
         if (keyEvent.shiftKey) { modifiers.push(NgxKeyModifier.Shift); }
 
         return {
-            code: <NgxKeyCode>keyEvent.keyCode,
+            code: <NgxKey>keyEvent.keyCode,
             modifiers,
             name: keyEvent.code
         };
