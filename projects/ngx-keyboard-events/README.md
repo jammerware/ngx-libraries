@@ -54,3 +54,7 @@ export class AppComponent implements OnInit {
     }
 }
 ```
+
+## Know issues
+
+The current implementation of the service makes prodigious use of `keyEvent.keyCode` by mapping numerical values from this property to a Typescript enum for a better developer experience. `keyCode` is deprecated in favor of [`key`](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key), a string property. I need to rejigger my solution so that 1) it takes advantage of the complete set of possible values for `key`, and 2) it no longer relies on `keyCode`. This issue is being tracked [here](https://github.com/jammerware/ngx-libraries/issues/1).
