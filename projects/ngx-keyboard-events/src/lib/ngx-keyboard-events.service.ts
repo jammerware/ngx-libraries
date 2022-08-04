@@ -1,4 +1,5 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { AsyncSubject } from 'rxjs';
 import { NgxKeyboardEventsModule } from './ngx-keyboard-events.module';
 
 export enum NgxKey {
@@ -132,12 +133,12 @@ export class NgxKeyboardEvent {
 
 @Injectable({ providedIn: NgxKeyboardEventsModule })
 export class NgxKeyboardEventsService {
-  public onKeyPressed: EventEmitter<NgxKeyboardEvent> = new EventEmitter<NgxKeyboardEvent>();
+  public onKeyPressed: AsyncSubject<NgxKeyboardEvent> = new AsyncSubject<NgxKeyboardEvent>();
 
     constructor() {
         // can't use HostListener in a service :/
         window.addEventListener('keyup', (event) => {
-            this.onKeyPressed.emit(this.resolveKeyboardEvent(event));
+            this.onKeyPressed.next(this.resolveKeyboardEvent(event));
         });
     }
 

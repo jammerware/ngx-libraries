@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { NgxKeyboardEventsService } from './ngx-keyboard-events.service';
 
 describe('NgxKeyboardEventsService', () => {
