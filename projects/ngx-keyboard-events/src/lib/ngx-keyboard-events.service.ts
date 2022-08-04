@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { AsyncSubject } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { NgxKeyboardEventsModule } from './ngx-keyboard-events.module';
 
 export enum NgxKey {
@@ -119,6 +120,13 @@ export enum NgxKey {
   NumPadSubtract = 109
 }
 
+export enum NgxKeyLocation {
+  Standard = 0,
+  Left = 1,
+  Right = 2, 
+  NumPad = 3
+}
+
 export enum NgxKeyModifier {
   AltOption,
   CtrlCmd,
@@ -133,17 +141,26 @@ export class NgxKeyboardEvent {
 
 @Injectable({ providedIn: NgxKeyboardEventsModule })
 export class NgxKeyboardEventsService {
-  public onKeyPressed: AsyncSubject<NgxKeyboardEvent> = new AsyncSubject<NgxKeyboardEvent>();
+  public onKeyDown$ = new Subject<NgxKeyboardEvent>();
+  public onKeyUp$ = new Subject<NgxKeyboardEvent>();
 
-    constructor() {
-        // can't use HostListener in a service :/
-        window.addEventListener('keyup', (event) => {
-            this.onKeyPressed.next(this.resolveKeyboardEvent(event));
+    constructor(@Inject(DOCUMENT) private document: Document) {
+        if (!document.defaultView) {
+          throw new Error("NgxKeyboardEvents requires a document with a truthy `defaultView` property.");
+        }
+
+        document.defaultView.addEventListener('keydown', (event) => {
+          this.onKeyDown$.next(this.resolveKeyboardEvent(event));
+        });
+
+        document.defaultView.addEventListener('keyup', (event) => {
+            this.onKeyUp$.next(this.resolveKeyboardEvent(event));
         });
     }
 
     resolveKeyboardEvent(keyEvent: KeyboardEvent) {
         const modifiers: NgxKeyModifier[] = [];
+        console.log('raw keyevent', keyEvent);
 
         if (keyEvent.altKey) { modifiers.push(NgxKeyModifier.AltOption); }
         if (keyEvent.ctrlKey) { modifiers.push(NgxKeyModifier.CtrlCmd); }
@@ -151,6 +168,7 @@ export class NgxKeyboardEventsService {
 
         return {
             code: <NgxKey>keyEvent.keyCode,
+            location: <NgxKeyLocation>keyEvent.location,
             modifiers,
             name: keyEvent.code
         };

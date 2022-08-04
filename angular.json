@@ -36,6 +36,109 @@
           }
         }
       }
+    },
+    "ngx-keyboard-events-playground": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/ngx-keyboard-events-playground",
+      "sourceRoot": "projects/ngx-keyboard-events-playground/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ngx-keyboard-events-playground",
+            "index": "projects/ngx-keyboard-events-playground/src/index.html",
+            "main": "projects/ngx-keyboard-events-playground/src/main.ts",
+            "polyfills": "projects/ngx-keyboard-events-playground/src/polyfills.ts",
+            "tsConfig": "projects/ngx-keyboard-events-playground/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/ngx-keyboard-events-playground/src/favicon.ico",
+              "projects/ngx-keyboard-events-playground/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-keyboard-events-playground/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngx-keyboard-events-playground/src/environments/environment.ts",
+                  "with": "projects/ngx-keyboard-events-playground/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-keyboard-events-playground:build:production"
+            },
+            "development": {
+              "browserTarget": "ngx-keyboard-events-playground:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-keyboard-events-playground:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-keyboard-events-playground/src/test.ts",
+            "polyfills": "projects/ngx-keyboard-events-playground/src/polyfills.ts",
+            "tsConfig": "projects/ngx-keyboard-events-playground/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-keyboard-events-playground/karma.conf.js",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/ngx-keyboard-events-playground/src/favicon.ico",
+              "projects/ngx-keyboard-events-playground/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-keyboard-events-playground/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-keyboard-events"
