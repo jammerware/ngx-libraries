@@ -160,7 +160,6 @@ export class NgxKeyboardEventsService {
 
     resolveKeyboardEvent(keyEvent: KeyboardEvent) {
         const modifiers: NgxKeyModifier[] = [];
-        console.log('raw keyevent', keyEvent);
 
         if (keyEvent.altKey) { modifiers.push(NgxKeyModifier.AltOption); }
         if (keyEvent.ctrlKey) { modifiers.push(NgxKeyModifier.CtrlCmd); }
