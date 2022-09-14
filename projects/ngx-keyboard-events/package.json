@@ -1,6 +1,14 @@
 {
   "name": "ngx-keyboard-events",
-  "version": "2.0.1",
+  "version": "2.0.2",
+  "description": "A simple [Angular](https://angular.io) module to bring an easy way to listen to keyboard events in a modularized way consistent with Angular's style.",
+  "keywords": [
+    "ngx",
+    "angular",
+    "keyboard events",
+    "keyboard shorcuts",
+    "keyboard"
+  ],
   "peerDependencies": {
     "@angular/common": ">=13.2.0",
     "@angular/core": ">=13.2.0"
